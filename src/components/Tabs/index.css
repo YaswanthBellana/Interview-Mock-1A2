@@ -1,0 +1,20 @@
+.container {
+  margin-right: 30px;
+  list-style: none;
+  list-style-type: none;
+}
+
+.button {
+  border-color: #db1c48;
+  background-color: #ffffff;
+  color: #db1c48;
+  border-radius: 10px;
+  padding: 5px;
+  width: 90px;
+  font-weight: 600;
+}
+
+.active-button {
+  background-color: #db1c48;
+  color: #ffffff;
+}

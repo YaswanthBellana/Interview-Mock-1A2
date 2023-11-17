@@ -1,3 +1,6 @@
+import {Component} from 'react'
+import Language from './components/Language'
+import Tabs from './components/Tabs'
 import './App.css'
 
 const languageGreetingsList = [
@@ -24,7 +27,45 @@ const languageGreetingsList = [
   },
 ]
 
-// Replace your code here
-const App = () => <h1>Hello World</h1>
+class App extends Component {
+  state = {activeId: languageGreetingsList[0].id}
+
+  clickTabItem = tabValue => {
+    this.setState({activeId: tabValue})
+  }
+
+  getFilteredItems = () => {
+    const {activeId} = this.state
+    const filteredItems = languageGreetingsList.filter(
+      eachDetails => eachDetails.id === activeId,
+    )
+    return filteredItems
+  }
+
+  render() {
+    const {activeId} = this.state
+    const filteredItems = this.getFilteredItems()
+
+    return (
+      <div className="mainContainer">
+        <h1 className="head">Multilingual Greetings</h1>
+        <ul className="options">
+          {languageGreetingsList.map(tabDetails => (
+            <Tabs
+              key={tabDetails.id}
+              tabDetails={tabDetails}
+              clickTabItem={this.clickTabItem}
+              isActive={activeId === tabDetails.id}
+            />
+          ))}
+        </ul>
+
+        {filteredItems.map(eachItem => (
+          <Language key={eachItem.id} languageDetails={eachItem} />
+        ))}
+      </div>
+    )
+  }
+}
 
 export default App
